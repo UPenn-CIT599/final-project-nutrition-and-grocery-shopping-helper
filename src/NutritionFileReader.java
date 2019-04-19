@@ -122,9 +122,53 @@ public class NutritionFileReader {
 		return source;
 	}
 	
+	/**
+	 * Returns the nutrient name and the units that its daily guideline are given in. 
+	 * Nutrient names are case insensitive. Information for the following 
+	 * nutrients are available:
+	 * 
+	 * Protein g
+	 * Protein %kcal
+	 * Carbohydrate g
+	 * Carbohydrate %kcal
+	 * fiber
+	 * sugar
+	 * Total fat
+	 * Saturated fat
+	 * Linoleic acid
+	 * Linolenic acid
+	 * Calcium
+	 * Iron
+	 * Magnesium
+	 * Phosphorus
+	 * Potassium
+	 * Sodium
+	 * Zinc
+	 * Copper
+	 * Manganese
+	 * Selenium
+	 * Vitamin A
+	 * Vitamin E
+	 * Vitamin D
+	 * Vitamin C
+	 * Thiamin
+	 * Riboflavin
+	 * Niacin
+	 * Vitamin B6
+	 * Vitamin B12
+	 * Choline
+	 * Vitamin K
+	 * Folate
+	 * @param nutrient
+	 * @return
+	 */
 	public String getNutrientUnit(String nutrient) {
 		String unit = "Nutrient: " + nutrient + " not found";
-		
+		nutrient = nutrient.toLowerCase();
+		int nutrientRow = getNutrientRow(nutrient);
+		if (nutrientRow != -1) {
+			unit = nutrientNames[nutrientRow][0];
+		}
 		return unit;
 	}
 	
