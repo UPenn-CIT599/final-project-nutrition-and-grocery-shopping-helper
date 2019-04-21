@@ -91,4 +91,10 @@ class junitTest {
 		
 	}
 
+	@Test
+	void checkFoodItemGetsPercentageFatCalories() {
+		FoodItem systemUnderTest = new FoodItem("Burger", 123, 1000, 14, 50, 25);
+		assertEquals(45, systemUnderTest.percentCaloriesFromFat());
+	}
+
 }

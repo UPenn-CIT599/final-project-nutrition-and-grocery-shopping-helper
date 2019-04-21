@@ -22,8 +22,8 @@ public class FoodItem {
         this.gramsCarbs = gramsCarbs;
     }
 
-    public Double percentCaloriesFromFat() {
-        return (gramsFat * 9.0) / calories;
+    public Integer percentCaloriesFromFat() {
+        return 100 * ((gramsFat * 9) / calories);
     }
 
     // TODO create some data structure to hold mineral amounts
