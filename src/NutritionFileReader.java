@@ -52,18 +52,18 @@ public class NutritionFileReader {
 	 * @return
 	 */
 	public String getNutrientRequirement(int age, String gender, String nutrient) {
-		String reccomendation = "Nutrient: " + nutrient + " not found";
+		String recomendation = "Nutrient: " + nutrient + " not found";
 		nutrient = nutrient.toLowerCase();
 		gender = gender.toLowerCase();
 		int nutrientRow = getNutrientRow(nutrient);
 		int nutrientColumn = getColumnFromAge(age, gender);
-		if (nutrientRow == -1) { return reccomendation; }
+		if (nutrientRow == -1) { return recomendation; }
 		if (gender.contains("fe")) {
-			reccomendation = nutritionDataFemale[nutrientRow][nutrientColumn];
+			recomendation = nutritionDataFemale[nutrientRow][nutrientColumn];
 		} else {
-			reccomendation = nutritionDataMale[nutrientRow][nutrientColumn];
+			recomendation = nutritionDataMale[nutrientRow][nutrientColumn];
 		}		
-		return reccomendation;
+		return recomendation;
 	}
 	
 	/** Gets the source of the guidelines for a given nutrient.
@@ -174,34 +174,38 @@ public class NutritionFileReader {
 	
 	/**
 	 * Puts the data parsed from file into age charts for male and female.
+	 * The USDA chart has separate columns for male and female, and has groupings
+	 * of age ranges. This method needs to account for both gender and group ages
+	 * within the same range to be under the same column. It then populates instance
+	 * variable arrays with this data for reference by other functions.
 	 */
 	public void populateAgeArrays() {
-		int maleIndex = 0;
+		int maleIndex = 0; // ages 0 to 3
 		int femaleIndex = 0;
 		for (int i = 0; i < 52; i++) {
-			if (i == 4) {
-				maleIndex = 2;
+			if (i == 4) { // ages 4 to 8
 				femaleIndex = 1;
+				maleIndex = 2;
 			}
-			if (i == 9) {
-				maleIndex = 4;
+			if (i == 9) { // ages 9 to 13
 				femaleIndex = 3;
+				maleIndex = 4;
 			}
-			if (i == 14) {
-				maleIndex = 6;
+			if (i == 14) { // ages 14 to 18
 				femaleIndex = 5;
+				maleIndex = 6;
 			}
-			if (i == 19) {
-				maleIndex = 8;
+			if (i == 19) { // ages 19 to 30
 				femaleIndex = 7;
+				maleIndex = 8;
 			}
-			if (i == 31) {
-				maleIndex = 10;
+			if (i == 31) { // ages 31 to 50
 				femaleIndex = 9;
+				maleIndex = 10;
 			}
-			if (i == 51) {
-				maleIndex = 12;
+			if (i == 51) { // ages 51 and older
 				femaleIndex = 11;
+				maleIndex = 12;				
 			}
 			ageChartMale[i] = maleIndex;
 			ageChartFemale[i] = femaleIndex;
@@ -209,8 +213,8 @@ public class NutritionFileReader {
 	}
 		
 	/**
-	 * The data chart has ages grouped together, 1-3, 4-8, etc. This function parse the 
-	 * age and gender then returns the correct column for the nutrition data.
+	 * The data chart has ages grouped together, 1-3, 4-8, etc. This method takes 
+	 * the age and gender then returns the correct column for the nutrition data.
 	 * @param age
 	 * @param gender
 	 * @return
