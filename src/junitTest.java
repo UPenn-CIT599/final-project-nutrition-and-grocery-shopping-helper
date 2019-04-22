@@ -154,4 +154,10 @@ class junitTest {
 		assertEquals("Nutrient: junk food not found", nfr.getNutrientUnit("junk food"));
 	}
 
+	@Test
+	void checkFoodItemGetsPercentageFatCalories() {
+		FoodItem systemUnderTest = new FoodItem("Burger", 123, 1000, 14, 50, 25);
+		assertEquals(45, systemUnderTest.percentCaloriesFromFat());
+	}
+
 }
