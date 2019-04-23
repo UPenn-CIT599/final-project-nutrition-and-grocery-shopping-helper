@@ -153,6 +153,43 @@ class junitTest {
 		assertEquals("Folate mcg DFE", nfr.getNutrientUnit("Folate"));
 		assertEquals("Nutrient: junk food not found", nfr.getNutrientUnit("junk food"));
 	}
+	
+	@Test
+	void checkGetSource() {
+		assertEquals("RDA", nfr.getSource("Protein g"));
+		assertEquals("AMDR", nfr.getSource("Protein %kcal"));
+		assertEquals("RDA", nfr.getSource("Carbohydrate g"));
+		assertEquals("AMDR", nfr.getSource("Carbohydrate %kcal"));
+		assertEquals("14g/1000 kcal", nfr.getSource("fiber"));
+		assertEquals("DGA", nfr.getSource("sugar"));
+		assertEquals("AMDR", nfr.getSource("Total fat"));
+		assertEquals("DGA", nfr.getSource("Saturated fat"));
+		assertEquals("AI", nfr.getSource("Linoleic"));
+		assertEquals("AI", nfr.getSource("Linolenic"));
+		assertEquals("RDA", nfr.getSource("Calcium"));
+		assertEquals("RDA", nfr.getSource("Iron"));
+		assertEquals("RDA", nfr.getSource("Magnesium"));
+		assertEquals("RDA", nfr.getSource("Phosphorus"));
+		assertEquals("AI", nfr.getSource("Potassium"));
+		assertEquals("UL", nfr.getSource("Sodium"));
+		assertEquals("RDA", nfr.getSource("Zinc"));
+		assertEquals("RDA", nfr.getSource("Copper"));
+		assertEquals("AI", nfr.getSource("Manganese"));
+		assertEquals("RDA", nfr.getSource("Selenium"));
+		assertEquals("RDA", nfr.getSource("Vitamin A"));
+		assertEquals("RDA", nfr.getSource("Vitamin E"));
+		assertEquals("RDA", nfr.getSource("Vitamin D"));
+		assertEquals("RDA", nfr.getSource("Vitamin C"));
+		assertEquals("RDA", nfr.getSource("Thiamin"));
+		assertEquals("RDA", nfr.getSource("Riboflavin"));
+		assertEquals("RDA", nfr.getSource("Niacin"));
+		assertEquals("RDA", nfr.getSource("Vitamin B6"));
+		assertEquals("RDA", nfr.getSource("Vitamin B12"));
+		assertEquals("AI", nfr.getSource("Choline"));
+		assertEquals("AI", nfr.getSource("Vitamin K"));
+		assertEquals("RDA", nfr.getSource("Folate"));
+		assertEquals("Nutrient: junk food not found", nfr.getSource("junk food"));
+	}
 
 	@Test
 	void checkFoodItemGetsPercentageFatCalories() {
