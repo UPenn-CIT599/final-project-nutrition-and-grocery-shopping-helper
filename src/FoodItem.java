@@ -3,17 +3,17 @@
  */
 public class FoodItem {
     public String name;
-    public Integer uniqueIdentifier;
-    public Integer calories;
-    public Integer gramsProtein;
-    public Integer gramsFat;
-    public Integer gramsCarbs;
+    public String uniqueIdentifier;
+    public Double calories;
+    public Double gramsProtein;
+    public Double gramsFat;
+    public Double gramsCarbs;
 
     public FoodItem(String name) {
         this.name = name;
     }
 
-    public FoodItem(String name, Integer uniqueIdentifier, Integer calories, Integer gramsProtein, Integer gramsFat, Integer gramsCarbs) {
+    public FoodItem(String name, String uniqueIdentifier, Double calories, Double gramsProtein, Double gramsFat, Double gramsCarbs) {
         this.name = name;
         this.uniqueIdentifier = uniqueIdentifier;
         this.calories = calories;
@@ -22,9 +22,12 @@ public class FoodItem {
         this.gramsCarbs = gramsCarbs;
     }
 
-    public Integer percentCaloriesFromFat() {
+    public double percentCaloriesFromFat() {
         return 100 * ((gramsFat * 9) / calories);
     }
 
-    // TODO create some data structure to hold mineral amounts
+    @Override
+    public String toString() {
+        return "FoodItem: " + name + " with " + calories + " calories";
+    }
 }
