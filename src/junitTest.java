@@ -87,8 +87,71 @@ class junitTest {
 		assertEquals("130", nfr.getNutrientRequirement(10, "Female", "Carbohydrate g"));
 		assertEquals("45-65", nfr.getNutrientRequirement(10, "Female", "Carbohydrate %kcal"));
 		assertEquals("22.4", nfr.getNutrientRequirement(10, "Female", "fiber"));
-
-		
+		assertEquals("<10%", nfr.getNutrientRequirement(13, "Female", "sugar"));
+		assertEquals("25-35", nfr.getNutrientRequirement(13, "Female", "Total fat"));
+		assertEquals("<10%", nfr.getNutrientRequirement(13, "Female", "Saturated fat"));
+		assertEquals("12", nfr.getNutrientRequirement(13, "Male", "Linoleic"));
+		assertEquals("1.2", nfr.getNutrientRequirement(13, "Male", "Linolenic"));
+		assertEquals("1300", nfr.getNutrientRequirement(13, "Male", "Calcium"));
+		assertEquals("11", nfr.getNutrientRequirement(17, "Male", "Iron"));
+		assertEquals("410", nfr.getNutrientRequirement(17, "Male", "Magnesium"));
+		assertEquals("1250", nfr.getNutrientRequirement(17, "Male", "Phosphorus"));
+		assertEquals("4700", nfr.getNutrientRequirement(30, "Male", "Potassium"));
+		assertEquals("2300", nfr.getNutrientRequirement(30, "Male", "Sodium"));
+		assertEquals("8", nfr.getNutrientRequirement(31, "female", "Zinc"));
+		assertEquals("900", nfr.getNutrientRequirement(31, "female", "Copper"));
+		assertEquals("1.8", nfr.getNutrientRequirement(31, "female", "Manganese"));
+		assertEquals("55", nfr.getNutrientRequirement(31, "female", "Selenium"));
+		assertEquals("700", nfr.getNutrientRequirement(45, "female", "Vitamin A"));
+		assertEquals("15", nfr.getNutrientRequirement(45, "female", "Vitamin E"));
+		assertEquals("600", nfr.getNutrientRequirement(45, "female", "Vitamin D"));
+		assertEquals("75", nfr.getNutrientRequirement(45, "female", "Vitamin C"));
+		assertEquals("1.1", nfr.getNutrientRequirement(65, "female", "Thiamin"));
+		assertEquals("1.1", nfr.getNutrientRequirement(65, "female", "Riboflavin"));
+		assertEquals("14", nfr.getNutrientRequirement(65, "female", "Niacin"));
+		assertEquals("1.7", nfr.getNutrientRequirement(65, "male", "Vitamin B6"));
+		assertEquals("2.4", nfr.getNutrientRequirement(65, "male", "Vitamin B12"));
+		assertEquals("550", nfr.getNutrientRequirement(95, "male", "Choline"));
+		assertEquals("120", nfr.getNutrientRequirement(95, "male", "Vitamin K"));
+		assertEquals("400", nfr.getNutrientRequirement(105, "female", "Folate"));
+		assertEquals("Nutrient: junk food not found", nfr.getNutrientRequirement(105, "female", "junk food"));	
+	}
+	
+	@Test
+	void testGetNutrientUnit() {
+		assertEquals("Protein g", nfr.getNutrientUnit("Protein g"));
+		assertEquals("Protein %kcal", nfr.getNutrientUnit("Protein %kcal"));
+		assertEquals("Carbohydrate g", nfr.getNutrientUnit("Carbohydrate g"));
+		assertEquals("Carbohydrate %kcal", nfr.getNutrientUnit("Carbohydrate %kcal"));
+		assertEquals("Dietary fiber g", nfr.getNutrientUnit("fiber"));
+		assertEquals("Added sugars %kcal", nfr.getNutrientUnit("sugar"));
+		assertEquals("Total fat %kcal", nfr.getNutrientUnit("Total fat"));
+		assertEquals("Saturated fat %kcal", nfr.getNutrientUnit("Saturated fat"));
+		assertEquals("Linoleic acid g", nfr.getNutrientUnit("Linoleic"));
+		assertEquals("Linolenic acid g", nfr.getNutrientUnit("Linolenic"));
+		assertEquals("Calcium mg", nfr.getNutrientUnit("Calcium"));
+		assertEquals("Iron mg", nfr.getNutrientUnit("Iron"));
+		assertEquals("Magnesium mg", nfr.getNutrientUnit("Magnesium"));
+		assertEquals("Phosphorus mg", nfr.getNutrientUnit("Phosphorus"));
+		assertEquals("Potassium mg", nfr.getNutrientUnit("Potassium"));
+		assertEquals("Sodium mg", nfr.getNutrientUnit("Sodium"));
+		assertEquals("Zinc mg", nfr.getNutrientUnit("Zinc"));
+		assertEquals("Copper mcg", nfr.getNutrientUnit("Copper"));
+		assertEquals("Manganese mg", nfr.getNutrientUnit("Manganese"));
+		assertEquals("Selenium mcg", nfr.getNutrientUnit("Selenium"));
+		assertEquals("Vitamin A mg RAE", nfr.getNutrientUnit("Vitamin A"));
+		assertEquals("Vitamin E mg AT", nfr.getNutrientUnit("Vitamin E"));
+		assertEquals("Vitamin D IU", nfr.getNutrientUnit("Vitamin D"));
+		assertEquals("Vitamin C mg", nfr.getNutrientUnit("Vitamin C"));
+		assertEquals("Thiamin mg", nfr.getNutrientUnit("Thiamin"));
+		assertEquals("Riboflavin mg", nfr.getNutrientUnit("Riboflavin"));
+		assertEquals("Niacin mg", nfr.getNutrientUnit("Niacin"));
+		assertEquals("Vitamin B6 mg", nfr.getNutrientUnit("Vitamin B6"));
+		assertEquals("Vitamin B12 mcg", nfr.getNutrientUnit("Vitamin B12"));
+		assertEquals("Choline mg", nfr.getNutrientUnit("Choline"));
+		assertEquals("Vitamin K mcg", nfr.getNutrientUnit("Vitamin K"));
+		assertEquals("Folate mcg DFE", nfr.getNutrientUnit("Folate"));
+		assertEquals("Nutrient: junk food not found", nfr.getNutrientUnit("junk food"));
 	}
 
 	@Test
