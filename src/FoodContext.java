@@ -10,4 +10,9 @@ public class FoodContext {
         this.name = name;
         this.uniqueId = uniqueId;
     }
+
+    @Override
+    public String toString() {
+        return name + " with id: " + uniqueId;
+    }
 }

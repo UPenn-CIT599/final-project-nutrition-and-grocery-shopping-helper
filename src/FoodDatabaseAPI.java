@@ -12,9 +12,15 @@ import java.util.Scanner;
  * https://ndb.nal.usda.gov/ndb/foods
  */
 public class FoodDatabaseAPI {
+    public static String TOTAL_PROTEIN_NUTRIENT_KEY = "203";
+    public static String TOTAL_FAT_NUTRIENT_KEY = "204";
+    public static String TOTAL_CARBS_NUTRIENT_KEY = "205";
+    public static String TOTAL_CALORIES_NUTRIENT_KEY = "208";
+
     public static void main(String[] args) {
         FoodDatabaseAPI api = new FoodDatabaseAPI();
-        api.searchForFood("banana");
+        FoodContext banana = api.searchForFood("banana").get(0);
+        api.getFoodDetails(banana);
     }
 
     private static String API_URL = "https://api.nal.usda.gov/ndb/";
@@ -52,6 +58,7 @@ public class FoodDatabaseAPI {
             System.out.println("Exception thrown accessing search API, returning empty list");
             e.printStackTrace();
         }
+        System.out.println(result);
         return result;
     }
 
@@ -61,8 +68,37 @@ public class FoodDatabaseAPI {
      * @return FoodItem containing nutrient information for a specific food
      */
     public FoodItem getFoodDetails(FoodContext food) {
-        // stubbed for now
-        return new FoodItem("fake name");
+        System.out.println("getting food detaisl" + food.toString());
+        try {
+            JSONObject detailsResponse = makeDetailsRequest(food.uniqueId);
+            JSONObject foodDetails = detailsResponse.getJSONObject("report").getJSONObject("food");
+            String foodName = foodDetails.getString("name");
+            JSONArray nutrients = foodDetails.getJSONArray("nutrients");
+            Double gramsProtein = 0.0;
+            Double gramsFat = 0.0;
+            Double gramsCarbs = 0.0;
+            Double calories = 0.0;
+            // iterate through nutrients list and find nutrients
+            for (int i = 0; i < nutrients.length(); i++) {
+                JSONObject nutrient = nutrients.getJSONObject(i);
+                String name = nutrient.getString("nutrient_id");
+                Double nutrientValue = nutrient.getDouble("value");
+                if (name.equals(TOTAL_CALORIES_NUTRIENT_KEY)) {
+                    calories = nutrientValue;
+                } else if (name.equals(TOTAL_CARBS_NUTRIENT_KEY)) {
+                    gramsCarbs = nutrientValue;
+                } else if (name.equals(TOTAL_FAT_NUTRIENT_KEY)) {
+                    gramsFat = nutrientValue;
+                } else if (name.equals(TOTAL_PROTEIN_NUTRIENT_KEY)) {
+                    gramsProtein = nutrientValue;
+                }
+            }
+            return new FoodItem(foodName, food.uniqueId, calories, gramsProtein, gramsFat, gramsCarbs);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            System.out.println("Exception thrown getting food details for: " + food.toString());
+        }
+        return null;
     }
 
     /**
@@ -80,10 +116,20 @@ public class FoodDatabaseAPI {
     }
 
     private JSONObject makeSearchRequest(String searchString) {
-        String searchUrl = (API_URL + "/search/?format=json&q=" + searchString + "&api_key=" + apiKey);
+        String searchUrl = (API_URL + "/search?format=json&q=" + searchString + "&api_key=" + apiKey);
         System.out.println("searchUrl" + searchUrl);
         try {
             return makeAPICall(searchUrl);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private JSONObject makeDetailsRequest(String uniqueId) {
+        String queryUrl = (API_URL + "/reports?ndbno=" + uniqueId + "&type=b&format=json&api_key=" + apiKey);
+        try {
+            return makeAPICall(queryUrl);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
             return null;
