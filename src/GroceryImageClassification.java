@@ -1,4 +1,4 @@
-package com.microsoft.azure.customvision.samples;
+
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.*;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.*;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.ImagePrediction;
@@ -37,9 +37,8 @@ public class GroceryImageClassification {
     	// Create a new project in the Custom Vision Account 
     	System.out.println("Creating new project:"); 
     	Trainings trainings = client.trainings();
-    	Project project = trainings.createProject().withName("GroceryClassifierMCIT1").execute();
-    	
-    	
+    	Project project = trainings.createProject().withName("GroceryClassifierMCIT").execute();
+    	 	
     	//create classification Tags
     	System.out.println("Create Tags"); 
     	Tag BananaTag = trainings.createTag().withProjectId(project.id()).withName("Banana").execute();
@@ -177,9 +176,11 @@ public class GroceryImageClassification {
     	  
     	  //this loads an image to test against the trained model
     	  File testFile = new File("test.jpeg");
+    	  System.out.println("path is " + testFile.getAbsolutePath());
+    	  
     	  try {
     		  
-			testImage = Files.readAllBytes(testFile.toPath());
+			    testImage = Files.readAllBytes(testFile.toPath());
 			
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
