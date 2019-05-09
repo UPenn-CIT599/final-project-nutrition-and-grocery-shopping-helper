@@ -14,7 +14,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.4.0</version>
         <configuration>
-          <mainClass>com.microsoft.azure.customvision.samples.Samples</mainClass>
+          <mainClass></mainClass>
         </configuration>
       </plugin>
       <plugin>

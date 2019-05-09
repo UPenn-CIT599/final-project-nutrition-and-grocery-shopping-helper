@@ -1,4 +1,3 @@
-
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.*;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.*;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.ImagePrediction;
@@ -175,9 +174,7 @@ public class GroceryImageClassification {
     	  }
     	  
     	  //this loads an image to test against the trained model
-    	  File testFile = new File("test.jpeg");
-    	  System.out.println("path is " + testFile.getAbsolutePath());
-    	  
+    	  File testFile = new File("data/test.jpeg");
     	  try {
     		  
 			    testImage = Files.readAllBytes(testFile.toPath());
