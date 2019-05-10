@@ -40,5 +40,17 @@ public class Nutrient {
 		return value;
 	}
 	
+	/**
+	 * Returns the recommended in-take for a given person and nutrient.
+	 * @param person
+	 * @param nfr
+	 * @return
+	 */
+	public String getRequirement(Person person, NutritionFileReader nfr) {
+		int age = person.getAge();
+		String gender = person.getGender();
+		String requirement = nfr.getNutrientRequirement(age, gender, this.name);		
+		return requirement;	
+	}
 	
 }

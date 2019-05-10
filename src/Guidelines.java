@@ -60,6 +60,14 @@ public class Guidelines {
         apple.addNutrient(new Nutrient("Vitamin D (D2 + D3)","µg", 0));
         apple.addNutrient(new Nutrient("Vitamin D","IU", 0));
         apple.addNutrient(new Nutrient("Vitamin K (phylloquinone)","µg", 0.8));
+        
+        // ask some questions: Age, Gender, Activity Level (Sedentary, Moderate or Active)
+        // create Person instance with that information
+        int age = 25; // To be replaced with GUI input
+        String gender = "male"; // To be replaced with GUI input
+        String activityLevel = "Sedentary"; // To be replaced with GUI input
+        Person user = new Person(age, gender, activityLevel); 
+
  
 	}
 
