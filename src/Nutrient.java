@@ -60,6 +60,7 @@ public class Nutrient {
 	 */
 	public String getSimpleName() {
 		String simpleName = name.toLowerCase();
+		if (simpleName.contains("energy")) { simpleName = "calories"; }
 		if (simpleName.contains("fat")) { simpleName = "fat"; }
 		if (simpleName.contains("carbohydrate")) { simpleName = "carbohydrate"; }
 		if (simpleName.contains("fiber")) { simpleName = "fiber"; }
