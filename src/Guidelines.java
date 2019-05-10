@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Guidelines {
 
@@ -63,17 +64,46 @@ public class Guidelines {
         
         // ask some questions: Age, Gender, Activity Level (Sedentary, Moderate or Active)
         // create Person instance with that information
-        int age = 25; // To be replaced with GUI input
-        String gender = "male"; // To be replaced with GUI input
-        String activityLevel = "Sedentary"; // To be replaced with GUI input
+        Scanner myScanner = new Scanner(System.in);
+        System.out.println("Please enter your age:");
+        int age = myScanner.nextInt();
+        System.out.println("Please enter your activity level (Sedentary, Moderate or Active)");
+        String activityLevel = myScanner.next();
+        System.out.println("Please enter your gender (male or female)");
+        String gender = myScanner.next();
         Person user = new Person(age, gender, activityLevel); 
         
-        // See what matches between API and RDA recomendations
+        System.out.println("Enter a food (Apple, to be replaced by computer vision API identifying food)");
+        String Food = myScanner.next();
+        
+        // See what matches between API and RDA recommendations
+        System.out.println("One serving of this food item, " + apple.name + ", provides these nutrients:");
+    	
         for (Nutrient ntrt : apple.nutrients) {
         	String nutrient = ntrt.getSimpleName();
         	String requirement = nfr.getNutrientRequirement(age, gender, nutrient);
-        	System.out.println("Line 74 " + ntrt.getName() + " " + requirement);
+        	String units = nfr.getNutrientUnit(nutrient);
+        	if (ntrt.getValue() > 0.0) {
+        		System.out.println( ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need " + requirement + " " + units);
+        	}
         }
+        
+        System.out.println("Enter a food (Banana, to be replaced by computer vision API identifying food)");
+        String Food2 = myScanner.next();
+        
+        // See what matches between API and RDA recommendations
+        System.out.println(" ');
+        System.out.println("One serving of this food item, " + banana.name + ", provides these nutrients:");
+    	
+        for (Nutrient ntrt : apple.nutrients) {
+        	String nutrient = ntrt.getSimpleName();
+        	String requirement = nfr.getNutrientRequirement(age, gender, nutrient);
+        	String units = nfr.getNutrientUnit(nutrient);
+        	if (ntrt.getValue() > 0.0) {
+        		System.out.println( ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need " + requirement + " " + units);
+        	}
+        }
+
 
  
 	}

@@ -78,12 +78,7 @@ public class Nutrient {
 		if (simpleName.contains("vitamin a")) { simpleName = "vitamin a"; }
 		if (simpleName.contains("vitamin e")) { simpleName = "vitamin e"; }
 		if (simpleName.contains("vitamin d")) { simpleName = "vitamin d"; }
-		if (simpleName.contains("vitamin k")) { simpleName = "vitamin k"; }
-
-		
-		
-		
-		
+		if (simpleName.contains("vitamin k")) { simpleName = "vitamin k"; }	
 		return simpleName;
 	}
 	
