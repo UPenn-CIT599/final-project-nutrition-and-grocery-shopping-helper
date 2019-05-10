@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class FoodItem {
     public String name;
     public String uniqueIdentifier;
-    public ArrayList<Nutrient> nutrients;
+    public ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
     public Double calories;
     public Double gramsProtein;
     public Double gramsFat;
