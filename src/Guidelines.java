@@ -67,6 +67,13 @@ public class Guidelines {
         String gender = "male"; // To be replaced with GUI input
         String activityLevel = "Sedentary"; // To be replaced with GUI input
         Person user = new Person(age, gender, activityLevel); 
+        
+        // See what matches between API and RDA recomendations
+        for (Nutrient ntrt : apple.nutrients) {
+        	String nutrient = ntrt.getSimpleName();
+        	String requirement = nfr.getNutrientRequirement(age, gender, nutrient);
+        	System.out.println("Line 74 " + ntrt.getName() + " " + requirement);
+        }
 
  
 	}
