@@ -71,62 +71,55 @@ public class Guidelines {
 		int age = myScanner.nextInt();
 		System.out.println("Please enter your activity level (Sedentary, Moderate or Active)");
 		String activityLevel = myScanner.next();
+		activityLevel = activityLevel.toLowerCase();
 		System.out.println("Please enter your gender (male or female)");
 		String gender = myScanner.next();
+		gender = gender.toLowerCase();
 		Person user = new Person(age, gender, activityLevel);
 
-		System.out.println("Enter a food (Apple, to be replaced by computer vision API identifying food)");
-		String Food = myScanner.next();
-
-		// See what matches between API and RDA recommendations
-		System.out.println("One serving of this food item, " + apple.name + ", provides these nutrients:");
-
-		for (Nutrient ntrt : apple.nutrients) {
-			String units;
-			String requirement = "";
-			String nutrient = ntrt.getSimpleName();
-			if (nutrient.contains("calories")) {
-				nutrient = "calories";
-				int requirementInt = cfr.getCalories(age, gender, activityLevel);
-				requirement = Integer.toString(requirementInt);
-				units = "kcal";
-			} else {
-				requirement = nfr.getNutrientRequirement(age, gender, nutrient);
-				units = nfr.getNutrientUnit(nutrient);
+		String food = "next";
+		FoodItem currentFoodItem = apple;
+		while (!food.contains("quit")) {
+			System.out.println(
+					"Enter a food, or 'quit' to exit:\n(apple or banana, to be replaced by computer vision API identifying food)");
+			food = myScanner.next();
+			food = food.toLowerCase();
+			if (food.contains("quit")) {
+				break;
 			}
-			if (ntrt.getValue() > 0.0) {
-				System.out.println(ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need "
-						+ requirement + " " + units);
+			if (food.contains("apple"))
+				currentFoodItem = apple;
+			if (food.contains("banana"))
+				currentFoodItem = banana;
+			if (!food.contains("apple") && !food.contains("banana")) {
+				System.out.println("Food item '" + food + "' not found. Please try again or type 'quit' to exit");
+				continue;
 			}
+
+			// See what matches between API and RDA recommendations
+			System.out
+					.println("One serving of this food item, " + currentFoodItem.name + ", provides these nutrients:");
+
+			for (Nutrient ntrt : currentFoodItem.nutrients) {
+				String units;
+				String requirement = "";
+				String nutrient = ntrt.getSimpleName();
+				if (nutrient.contains("calories")) {
+					nutrient = "calories";
+					int requirementInt = cfr.getCalories(age, gender, activityLevel);
+					requirement = Integer.toString(requirementInt);
+					units = "kcal";
+				} else {
+					requirement = nfr.getNutrientRequirement(age, gender, nutrient);
+					units = nfr.getNutrientUnit(nutrient);
+				}
+				if (ntrt.getValue() > 0.0) {
+					System.out.println(ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need "
+							+ requirement + " " + units);
+				}
+			}
+			System.out.println(" ");
 		}
-
-		System.out.println(" ");
-		System.out.println("Enter a food (Banana, to be replaced by computer vision API identifying food)");
-		String Food2 = myScanner.next();
-
-		// See what matches between API and RDA recommendations
-		System.out.println(" ");
-		System.out.println("One serving of this food item, " + banana.name + ", provides these nutrients:");
-
-		for (Nutrient ntrt : banana.nutrients) {
-			String units;
-			String requirement = "";
-			String nutrient = ntrt.getSimpleName();
-			if (nutrient.contains("calories")) {
-				nutrient = "calories";
-				int requirementInt = cfr.getCalories(age, gender, activityLevel);
-				requirement = Integer.toString(requirementInt);
-				units = "kcal";
-			} else {
-				requirement = nfr.getNutrientRequirement(age, gender, nutrient);
-				units = nfr.getNutrientUnit(nutrient);
-			}
-			if (ntrt.getValue() > 0.0) {
-				System.out.println(ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need "
-						+ requirement + " " + units);
-			}
-		}
-
 	}
 
 }
