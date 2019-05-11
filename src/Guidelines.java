@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Scanner;
 
 public class Guidelines {
@@ -108,6 +110,7 @@ public class Guidelines {
 					nutrient = "calories";
 					int requirementInt = cfr.getCalories(age, gender, activityLevel);
 					requirement = Integer.toString(requirementInt);
+					System.out.println(requirementInt + " " + age + " " +gender + " "+ activityLevel);
 					units = "kcal";
 				} else {
 					requirement = nfr.getNutrientRequirement(age, gender, nutrient);

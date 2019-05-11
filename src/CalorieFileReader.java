@@ -57,15 +57,24 @@ public class CalorieFileReader {
 		return ageAsInt;		
 	}
 	
+	/**
+	 * Returns the calories recommended for a person based on age, gender and activity level.
+	 * @param age
+	 * @param gender
+	 * @param activityLevel
+	 * @return
+	 */
 	public int getCalories(int age, String gender, String activityLevel) {
+		gender = gender.toLowerCase();
+		activityLevel = activityLevel.toLowerCase();
 		if (age > 76) { age = 76; }
 		if (age < 2) { age = 2; }
 		int calories = -1;
 		int activityLevelInt = 0;
-		if (activityLevel.contentEquals("Sedentary")) { activityLevelInt += 1; }
-		if (activityLevel.contentEquals("Moderate")) { activityLevelInt += 2; }
-		if (activityLevel.contentEquals("Active")) { activityLevelInt += 3; }
-		if (gender.contentEquals("Female")) { activityLevelInt += 3; }
+		if (activityLevel.contentEquals("sedentary")) { activityLevelInt += 1; }
+		if (activityLevel.contentEquals("moderate")) { activityLevelInt += 2; }
+		if (activityLevel.contentEquals("active")) { activityLevelInt += 3; }
+		if (gender.contentEquals("female")) { activityLevelInt += 3; }
 		calories = calorieData[age - 2][activityLevelInt];
 		return calories;
 	}
