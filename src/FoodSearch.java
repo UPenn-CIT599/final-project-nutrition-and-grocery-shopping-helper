@@ -1,10 +1,13 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FoodSearch {
     private FoodDatabaseAPI api;
+    private LevenshteinDistance distanceCalculator;
 
-    public FoodSearch(FoodDatabaseAPI api) {
+    public FoodSearch(FoodDatabaseAPI api, LevenshteinDistance distanceCalculator) {
         this.api = api;
+        this.distanceCalculator = distanceCalculator;
     }
 
     /**
@@ -13,7 +16,7 @@ public class FoodSearch {
      * @return FoodItem that is "closest" to search string
      */
     public FoodItem getFoodItem(String searchString) {
-        List<FoodContext> possibleItems = api.searchForFood(searchString);
+        List<FoodContext> possibleItems = api.searchForFood(searchString, 10);
         FoodContext closestItem = getClosestDistanceFood(possibleItems, searchString);
         return api.getFoodDetails(closestItem);
     }
@@ -23,10 +26,10 @@ public class FoodSearch {
      * @param foods List of food name-uniqueId pairs from the search API
      * @param searchString query string used in the search API call
      * @return closest food based on Levenshtien distance from the search string
-     * TODO: if there is time I'd like to implement a smarter sort algo than string distance
      */
     private FoodContext getClosestDistanceFood(List<FoodContext> foods, String searchString) {
-        // stubbed
-        return new FoodContext("fake", "fake");
+        List<String> names = foods.stream().map(food -> food.name).collect(Collectors.toList());
+        int idxOfClosestFood = distanceCalculator.getIndexClosestWord(searchString, names);
+        return foods.get(idxOfClosestFood);
     }
 }
