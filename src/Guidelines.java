@@ -1,3 +1,6 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Scanner;
 
 public class Guidelines {
 
@@ -5,13 +8,121 @@ public class Guidelines {
 		// File prep: Save in Excel as CSV then open in TextEdit and "zap gremlins"
 		CalorieFileReader cfr = new CalorieFileReader("CalorieNeeds.csv");
 		NutritionFileReader nfr = new NutritionFileReader("NutritionalGoals.csv");
-		System.out.println(nfr.getColumnFromAge(1, "Female"));
-		System.out.println(nfr.getColumnFromAge(4, "Female"));
-		System.out.println(nfr.getColumnFromAge(10, "Female"));
-		System.out.println(nfr.getColumnFromAge(1, "Male"));
-		System.out.println(nfr.getColumnFromAge(4, "male"));
-		System.out.println(nfr.getColumnFromAge(10, "male"));
- 
+
+		FoodItem banana = new FoodItem("Bananas, raw");
+		banana.addNutrient(new Nutrient("Energy", "kcal", 112));
+		banana.addNutrient(new Nutrient("Protein", "g", 1.37));
+		banana.addNutrient(new Nutrient("Total lipid (fat)", "g", 0.42));
+		banana.addNutrient(new Nutrient("Carbohydrate, by difference", "g", 28.78));
+		banana.addNutrient(new Nutrient("Fiber, total dietary", "g", 3.3));
+		banana.addNutrient(new Nutrient("Sugars, total", "g", 15.41));
+		banana.addNutrient(new Nutrient("Calcium, Ca", "mg", 6));
+		banana.addNutrient(new Nutrient("Iron, Fe", "mg", 0.33));
+		banana.addNutrient(new Nutrient("Magnesium, Mg", "mg", 34));
+		banana.addNutrient(new Nutrient("Phosphorus, P", "mg", 28));
+		banana.addNutrient(new Nutrient("Potassium, K", "mg", 451));
+		banana.addNutrient(new Nutrient("Sodium, Na", "mg", 1));
+		banana.addNutrient(new Nutrient("Zinc, Zn", "mg", 0.19));
+		banana.addNutrient(new Nutrient("Vitamin C, total ascorbic acid", "mg", 11));
+		banana.addNutrient(new Nutrient("Thiamin", "mg", 0.039));
+		banana.addNutrient(new Nutrient("Riboflavin", "mg", 0.092));
+		banana.addNutrient(new Nutrient("Niacin", "mg", 0.838));
+		banana.addNutrient(new Nutrient("Vitamin B-6", "mg", 0.462));
+		banana.addNutrient(new Nutrient("Folate, DFE", "µg", 25));
+		banana.addNutrient(new Nutrient("Vitamin B-12", "µg", 0));
+		banana.addNutrient(new Nutrient("Vitamin A, RAE", "µg", 4));
+		banana.addNutrient(new Nutrient("Vitamin A, IU", "IU", 81));
+		banana.addNutrient(new Nutrient("Vitamin E (alpha-tocopherol)", "mg", 0.13));
+		banana.addNutrient(new Nutrient("Vitamin D (D2 + D3)", "µg", 0));
+		banana.addNutrient(new Nutrient("Vitamin D", "IU", 0));
+		banana.addNutrient(new Nutrient("Vitamin K (phylloquinone)", " µg", 0.6));
+
+		FoodItem apple = new FoodItem("Apples, raw");
+		apple.addNutrient(new Nutrient("Energy", "kcal", 63));
+		apple.addNutrient(new Nutrient("Protein", "g", 0.36));
+		apple.addNutrient(new Nutrient("Total lipid (fat)", "g", 0.17));
+		apple.addNutrient(new Nutrient("Carbohydrate, by difference", "g", 16.84));
+		apple.addNutrient(new Nutrient("Fiber, total dietary", "g", 1.7));
+		apple.addNutrient(new Nutrient("Sugars, total", "g", 13.33));
+		apple.addNutrient(new Nutrient("Calcium, Ca", "mg", 7));
+		apple.addNutrient(new Nutrient("Iron, Fe", "mg", 0.09));
+		apple.addNutrient(new Nutrient("Magnesium, Mg", "mg", 5));
+		apple.addNutrient(new Nutrient("Phosphorus, P", "mg", 15));
+		apple.addNutrient(new Nutrient("Potassium, K", "mg", 119));
+		apple.addNutrient(new Nutrient("Sodium, Na", "mg", 0));
+		apple.addNutrient(new Nutrient("Zinc, Zn", "mg", 0.07));
+		apple.addNutrient(new Nutrient("Vitamin C, total ascorbic acid", "mg", 5.3));
+		apple.addNutrient(new Nutrient("Thiamin", "mg", 0.025));
+		apple.addNutrient(new Nutrient("Riboflavin", "mg", 0.037));
+		apple.addNutrient(new Nutrient("Niacin", "mg", 0.12));
+		apple.addNutrient(new Nutrient("Vitamin B-6", "mg", 0.049));
+		apple.addNutrient(new Nutrient("Folate, DFE", "µg", 0));
+		apple.addNutrient(new Nutrient("Vitamin B-12", "µg", 0));
+		apple.addNutrient(new Nutrient("Vitamin A, RAE", "µg", 3));
+		apple.addNutrient(new Nutrient("Vitamin A, IU", "IU", 50));
+		apple.addNutrient(new Nutrient("Vitamin E (alpha-tocopherol)", "mg", 0.07));
+		apple.addNutrient(new Nutrient("Vitamin D (D2 + D3)", "µg", 0));
+		apple.addNutrient(new Nutrient("Vitamin D", "IU", 0));
+		apple.addNutrient(new Nutrient("Vitamin K (phylloquinone)", "µg", 0.8));
+
+		// ask some questions: Age, Gender, Activity Level (Sedentary, Moderate or
+		// Active)
+		// create Person instance with that information
+		Scanner myScanner = new Scanner(System.in);
+		System.out.println("Please enter your age:");
+		int age = myScanner.nextInt();
+		System.out.println("Please enter your activity level (Sedentary, Moderate or Active)");
+		String activityLevel = myScanner.next();
+		activityLevel = activityLevel.toLowerCase();
+		System.out.println("Please enter your gender (male or female)");
+		String gender = myScanner.next();
+		gender = gender.toLowerCase();
+		Person user = new Person(age, gender, activityLevel);
+
+		String food = "next";
+		FoodItem currentFoodItem = apple;
+		while (!food.contains("quit")) {
+			System.out.println(
+					"Enter a food, or 'quit' to exit:\n(apple or banana, to be replaced by computer vision API identifying food)");
+			food = myScanner.next();
+			food = food.toLowerCase();
+			if (food.contains("quit")) {
+				break;
+			}
+			if (food.contains("apple"))
+				currentFoodItem = apple;
+			if (food.contains("banana"))
+				currentFoodItem = banana;
+			if (!food.contains("apple") && !food.contains("banana")) {
+				System.out.println("Food item '" + food + "' not found. Please try again or type 'quit' to exit");
+				continue;
+			}
+
+			// See what matches between API and RDA recommendations
+			System.out
+					.println("One serving of this food item, " + currentFoodItem.name + ", provides these nutrients:");
+
+			for (Nutrient ntrt : currentFoodItem.nutrients) {
+				String units;
+				String requirement = "";
+				String nutrient = ntrt.getSimpleName();
+				if (nutrient.contains("calories")) {
+					nutrient = "calories";
+					int requirementInt = cfr.getCalories(age, gender, activityLevel);
+					requirement = Integer.toString(requirementInt);
+					System.out.println(requirementInt + " " + age + " " +gender + " "+ activityLevel);
+					units = "kcal";
+				} else {
+					requirement = nfr.getNutrientRequirement(age, gender, nutrient);
+					units = nfr.getNutrientUnit(nutrient);
+				}
+				if (ntrt.getValue() > 0.0) {
+					System.out.println(ntrt.getName() + " " + ntrt.getValue() + " " + ntrt.getUnits() + ", you need "
+							+ requirement + " " + units);
+				}
+			}
+			System.out.println(" ");
+		}
 	}
 
 }
