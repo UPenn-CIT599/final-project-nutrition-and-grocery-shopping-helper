@@ -35,6 +35,10 @@ public class FoodDatabaseAPI {
         }
     }
 
+    public List<FoodContext> searchForFood(String searchString, int limit) {
+        return searchForFood(searchString).subList(0, limit);
+    }
+
     /**
      *
      * @param searchString name of the food to query the "Food Search API" for
@@ -58,7 +62,7 @@ public class FoodDatabaseAPI {
             System.out.println("Exception thrown accessing search API, returning empty list");
             e.printStackTrace();
         }
-        System.out.println(result);
+//        System.out.println(result);
         return result;
     }
 
@@ -68,7 +72,6 @@ public class FoodDatabaseAPI {
      * @return FoodItem containing nutrient information for a specific food
      */
     public FoodItem getFoodDetails(FoodContext food) {
-        System.out.println("getting food detaisl" + food.toString());
         try {
             JSONObject detailsResponse = makeDetailsRequest(food.uniqueId);
             JSONObject foodDetails = detailsResponse.getJSONObject("report").getJSONObject("food");
@@ -117,7 +120,7 @@ public class FoodDatabaseAPI {
 
     private JSONObject makeSearchRequest(String searchString) {
         String searchUrl = (API_URL + "/search?format=json&q=" + searchString + "&api_key=" + apiKey);
-        System.out.println("searchUrl" + searchUrl);
+        System.out.println("Querying USDA API with this URL: " + searchUrl);
         try {
             return makeAPICall(searchUrl);
         } catch (IOException | JSONException e) {

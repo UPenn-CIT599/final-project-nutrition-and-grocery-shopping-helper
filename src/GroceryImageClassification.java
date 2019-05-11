@@ -18,7 +18,6 @@ import java.util.Collections;
  * Pushes up training and testing data sets of images that are then trained by Custom Vision
  * Custom Vision return predicted tags for testing data set
  */
-
 public class GroceryImageClassification {
 
 	public static String trainingKey = "d439052477fe42e2ba97ed5e2fef84a9"; //Training key from Custom Vision account
