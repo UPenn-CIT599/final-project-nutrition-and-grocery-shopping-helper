@@ -14,14 +14,10 @@ public class LevenshteinDistance {
         int minDistance = getDistance(comparisonWords.get(0), targetWord);
         int minWordIdx = 0;
         for (int i = 1; i < comparisonWords.size(); i++) {
-            System.out.println("comparing " + comparisonWords.get(minWordIdx) + " with " + comparisonWords.get(i));
             int distance = getDistance(targetWord, comparisonWords.get(i));
             if (distance < minDistance) {
                 minDistance = distance;
                 minWordIdx = i;
-                System.out.println(comparisonWords.get(i) + " wins");
-            } else {
-                System.out.println(comparisonWords.get(minWordIdx) + " wins");
             }
         }
         return minWordIdx;
