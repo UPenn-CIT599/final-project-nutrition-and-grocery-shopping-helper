@@ -55,6 +55,12 @@
       <version>20180813</version>
     </dependency>
       <!-- https://mvnrepository.com/artifact/junit/junit -->
+      <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <version>5.0.1</version>
+          <scope>test</scope>
+      </dependency>
     <dependency>
       <groupId>com.microsoft.azure</groupId>
       <artifactId>azure</artifactId>
