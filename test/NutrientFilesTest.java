@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class junitTest {
+class NutrientFilesTest {
 	// Initialize
 	CalorieFileReader cfr = new CalorieFileReader("CalorieNeeds.csv");
 	NutritionFileReader nfr = new NutritionFileReader("NutritionalGoals.csv");
