@@ -15,6 +15,10 @@ public class ProfileCreator {
         return new Person(age, gender, activityLevel);
     }
 
+    /**
+     * Queries the user and sets their age variable.
+     * @return
+     */
     private int askAge() {
         System.out.println("What is your current age?");
         int age = Integer.parseInt(scanner.nextLine());
@@ -26,6 +30,10 @@ public class ProfileCreator {
         }
     }
 
+    /**
+     * Queries the user and sets their gender variable.
+     * @return
+     */
     private String askGender() {
         System.out.println("What gender do you identify with?");
         System.out.println("Press 1 for male");
@@ -41,6 +49,10 @@ public class ProfileCreator {
         }
     }
 
+    /**
+     * Queries the user and sets their activity level variable.
+     * @return
+     */
     private String askActivityLevel() {
         System.out.println("What is your activity level?");
         System.out.println("Press 1 for \"Sedentary\"");
