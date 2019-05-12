@@ -48,3 +48,8 @@ To get a USDA API Key go to [this page](https://ndb.nal.usda.gov/ndb/doc/index#)
 The main class that orchestrates the entire user flow is `NutritionHelper.java`.
 
 Run this project by running `NutritionHelper.main`
+
+## Troubleshooting
+
+### Issue: Microsoft API returns 400
+Sometimes the Microsoft Custom Vision API refuses to create a project with the same name as one previously. Change [this String to something that you haven't used before to fix this problem](https://github.com/UPenn-CIT599/final-project-nutrition-and-grocery-shopping-helper/blob/master/src/GroceryImageClassification.java#L43)

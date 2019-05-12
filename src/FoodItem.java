@@ -14,10 +14,6 @@ public class FoodItem {
         this.uniqueIdentifier = uniqueIdentifier;
     }
 
-    public double percentCaloriesFromFat() {
-        return 100 * ((gramsFat * 9) / calories);
-    }
-
     @Override
     public String toString() {
         return "FoodItem: " + name + " with " + calories + " calories";
