@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 public class FoodSearch {
     private FoodDatabaseAPI api;
@@ -28,7 +29,10 @@ public class FoodSearch {
      * @return closest food based on Levenshtien distance from the search string
      */
     private FoodContext getClosestDistanceFood(List<FoodContext> foods, String searchString) {
-        List<String> names = foods.stream().map(food -> food.name).collect(Collectors.toList());
+        ArrayList<String> names = new ArrayList<>();
+        for (int i = 0; i < foods.size(); i++) {
+            names.add(foods.get(i).name);
+        }
         int idxOfClosestFood = distanceCalculator.getIndexClosestWord(searchString, names);
         return foods.get(idxOfClosestFood);
     }

@@ -12,17 +12,7 @@ import java.util.Scanner;
  * https://ndb.nal.usda.gov/ndb/foods
  */
 public class FoodDatabaseAPI {
-    public static String TOTAL_PROTEIN_NUTRIENT_KEY = "203";
-    public static String TOTAL_FAT_NUTRIENT_KEY = "204";
-    public static String TOTAL_CARBS_NUTRIENT_KEY = "205";
     public static String TOTAL_CALORIES_NUTRIENT_KEY = "208";
-
-    public static void main(String[] args) {
-        FoodDatabaseAPI api = new FoodDatabaseAPI();
-        FoodContext banana = api.searchForFood("banana").get(0);
-        api.getFoodDetails(banana);
-    }
-
     private static String API_URL = "https://api.nal.usda.gov/ndb/";
     private String apiKey;
 
@@ -62,7 +52,6 @@ public class FoodDatabaseAPI {
             System.out.println("Exception thrown accessing search API, returning empty list");
             e.printStackTrace();
         }
-//        System.out.println(result);
         return result;
     }
 
@@ -81,29 +70,27 @@ public class FoodDatabaseAPI {
             Double gramsFat = 0.0;
             Double gramsCarbs = 0.0;
             Double calories = 0.0;
-            // iterate through nutrients list and find nutrients
+
+            FoodItem foodItem = new FoodItem(foodName, food.uniqueId);
+            // iterate through nutrients list and find macronutrients
             for (int i = 0; i < nutrients.length(); i++) {
                 JSONObject nutrient = nutrients.getJSONObject(i);
-                String name = nutrient.getString("nutrient_id");
+                String id = nutrient.getString("nutrient_id");
                 Double nutrientValue = nutrient.getDouble("value");
-                if (name.equals(TOTAL_CALORIES_NUTRIENT_KEY)) {
-                    calories = nutrientValue;
-                } else if (name.equals(TOTAL_CARBS_NUTRIENT_KEY)) {
-                    gramsCarbs = nutrientValue;
-                } else if (name.equals(TOTAL_FAT_NUTRIENT_KEY)) {
-                    gramsFat = nutrientValue;
-                } else if (name.equals(TOTAL_PROTEIN_NUTRIENT_KEY)) {
-                    gramsProtein = nutrientValue;
+                if (id.equals(TOTAL_CALORIES_NUTRIENT_KEY)) {
+                    foodItem.calories = nutrientValue;
+                } else {
+                    foodItem.addNutrient(new Nutrient(nutrient.getString("name"), nutrient.getString("unit"), nutrientValue));
                 }
+
             }
-            return new FoodItem(foodName, food.uniqueId, calories, gramsProtein, gramsFat, gramsCarbs);
+            return foodItem;
         } catch (JSONException e) {
             e.printStackTrace();
             System.out.println("Exception thrown getting food details for: " + food.toString());
         }
         return null;
     }
-
     /**
      * Reads USDA API Key for a file in project root
      */
@@ -131,6 +118,7 @@ public class FoodDatabaseAPI {
 
     private JSONObject makeDetailsRequest(String uniqueId) {
         String queryUrl = (API_URL + "/reports?ndbno=" + uniqueId + "&type=b&format=json&api_key=" + apiKey);
+        System.out.println("Getting food details for id:" + uniqueId + "from url: " + queryUrl);
         try {
             return makeAPICall(queryUrl);
         } catch (IOException | JSONException e) {
