@@ -1,9 +1,17 @@
 # MCIT 591 Final Project: Computer Vision Nutrition Helper
+https://github.com/UPenn-CIT599/final-project-nutrition-and-grocery-shopping-helper
 
 ## Team Members
 Sid Sathi
 Richard Zorger
 Jonathan Deng
+
+## Work Breakdown
+Sid Sathi - Concept, GroceryImageClassification
+Richard Zorger - NutritionFileReader.java, CalorieFileReader.java, junit tests for both of these classes, Guidelines.java, Person.java
+Jonathan Deng - FoodItem.java, LevenshteinDistance.java, junit tests for both of these classes, FoodContext.java, FoodDatabase.java, FoodSearch.java, ProfileCreator.java, NutritionHelper.java
+
+The rest of the code was a group effort: Nutrient.java
 
 ## Project Description
 
