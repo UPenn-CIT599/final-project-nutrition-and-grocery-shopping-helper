@@ -44,7 +44,7 @@ This project depends on 2 external APIs, which require keys:
 
 To get a USDA API Key go to [this page](https://ndb.nal.usda.gov/ndb/doc/index#) and click "Sign Up Now".
 
-### 3. 
+### 3. Run
 The main class that orchestrates the entire user flow is `NutritionHelper.java`.
 
 Run this project by running `NutritionHelper.main`
