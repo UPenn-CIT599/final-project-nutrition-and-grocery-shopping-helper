@@ -1,42 +1,50 @@
-# final-project-nutrition-and-grocery-shopping-helper
+# MCIT 591 Final Project: Computer Vision Nutrition Helper
 
-Nutrition and Grocery Shopping Helper
-Computer Vision Based Grocery Basket Analysis
-
-Team Members
-
+## Team Members
 Sid Sathi
 Richard Zorger
 Jonathan Deng
 
-Project Idea and Description
+## Project Description
 
-Our group would like to create an application that allows people to take pictures of food and see how this food would affect their progress towards nutrition and diet goals.  Using a pre-trained image classifier, we can make a prediction what food item the user took a picture of, and show how eating the food would affect their health goals.
+Our group would like to create an application that allows people to take pictures of food and see how this food would affect their progress towards nutrition and diet goals.
+Using a pre-trained image classifier, the USDA REST API for nutrition information, and files on nutrition guidelines provided by the USDA, we can make a prediction what food item the user took a picture of, and show how eating the food would affect their health goals.
 
-Create a program where:
-•	The user enters nutrition and health goals and information about their age, sex, activity level, etc.
-•	The user uploads an image file and using a pre-trained classification model, the program will output what food item the user uploaded.
-•	The user sees how eating this food item would affect their nutrition goals. Nutrition information would be accessed via an API (i.e. MyFitnessPal API) or within some files contained in the project.
+## References
+[Initial Project Proposal](projectProposal.md)
 
-Task Breakdown
+[Presentation Slide Deck](https://docs.google.com/presentation/d/1Yb9poVkx75O-QNyQgVJNzV6YN-1qakat1r1r0t8jX3I/edit)
 
-Sid: How do we use a ML model to classify an image a user uploads? 
+## User Flow
+1. User uploads an image to the `/data` directory of this project. (In a mobile application, the client would have access to the camera API and handle this)
 
-Use the DeepLearning4j Deep Learning library to build an image classifier. Build pipelines to make predictions for food items. 
+2. A training image set is uploaded to the Microsoft Azure Custom Vision API, where a pre-existing classifier is trained on tagged food images. (In a production application this training step would occur asynchronously prior to the user uploading their photo)
 
-Jon: Once we know what food item a user uploaded, how do we access its nutrition information (API or local files)
+3. The user uploaded image is classified by the model running on Azure, which returns a String of the food name, i.e. "banana" or "apple"
 
-Create a FoodProfileRepository class that accesses a food’s nutrition information given its name (this class will abstract whether data is accessed locally or over the network)
+4. The search string is use to query the USDA Food Database REST API for nutrition details about the food.
 
-Create APIRequest class to get nutrition details from the API
+5. The user enters nutrition and health goals and information about their age, sex, and activity level. This allows the program to build a user
+profile.
 
-Richard: Once we have a food’s nutrition information, how do we show its significance in relation to the user’s nutrition goals.
+6. The program references USDA guidelines (stored in csv files in this project) to look up specific requirements based on the user profile
 
-Possible sources of personal nutritional guidelines:
-https://health.gov/dietaryguidelines/2015/guidelines/appendix-7/
-https://health.gov/dietaryguidelines/2015/guidelines/appendix-2/
+7. The program compares nutrition information describing the uploaded food image and compares it to personalized guidelines to inform a user how eating 
+that food affects them.
 
-Create a Person class with instance variables for age, sex, activity level, and personal goals.
+## Running this project
 
-Create getter functions for Macronutrients, Minerals, Vitamins and Calories accounting for instance variable customization.
+### 1. Build
+This project uses Maven as a build tool to import dependency libraries.  It needs to be imported into the IDE as a Maven project to delegate build and run tasks to Maven.
 
+### 2. Configure
+This project depends on 2 external APIs, which require keys:
+1. Microsoft Custom Vision: key is hardcoded in class representing the API access (don't worry it's a free account level test key!)
+2. USDA Database API: key needs to be pasted in `apiKey.txt` in the root level. (Delete `"DEMO_KEY"` string in that file.)
+
+To get a USDA API Key go to [this page](https://ndb.nal.usda.gov/ndb/doc/index#) and click "Sign Up Now".
+
+### 3. 
+The main class that orchestrates the entire user flow is `NutritionHelper.java`.
+
+Run this project by running `NutritionHelper.main`
