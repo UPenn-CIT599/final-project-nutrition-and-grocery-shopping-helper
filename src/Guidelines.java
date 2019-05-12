@@ -15,7 +15,7 @@ public class Guidelines {
         // See what matches between API and RDA recommendations
         System.out
                 .println("One serving of this food item, " + foodItem.name + ", provides these nutrients:");
-        System.out.println(FoodItem.getCalories() + " calories, you need " + calorieRequirement + " kcal");
+        System.out.println(foodItem.getCalories() + " calories, you need " + calorieRequirement + " kcal");
 
         for (Nutrient ntrt : foodItem.nutrients) {
             String units;

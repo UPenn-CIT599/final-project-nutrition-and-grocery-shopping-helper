@@ -7,7 +7,7 @@ public class FoodItem {
     public String name;
     public String uniqueIdentifier;
     public ArrayList<Nutrient> nutrients = new ArrayList<>();
-    public static Double calories;
+    public Double calories;
 
     public FoodItem(String name, String uniqueIdentifier) {
         this.name = name;
@@ -51,7 +51,7 @@ public class FoodItem {
 	/**
 	 * @return the calories
 	 */
-	public static Double getCalories() {
+	public Double getCalories() {
 		return calories;
 	}
 
