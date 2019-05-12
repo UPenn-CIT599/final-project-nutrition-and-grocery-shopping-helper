@@ -26,7 +26,8 @@ public class FoodDatabaseAPI {
     }
 
     public List<FoodContext> searchForFood(String searchString, int limit) {
-        return searchForFood(searchString).subList(0, limit);
+        List<FoodContext> apiResonses = searchForFood(searchString);
+        return apiResonses.subList(0, Math.min(limit, apiResonses.size()));
     }
 
     /**

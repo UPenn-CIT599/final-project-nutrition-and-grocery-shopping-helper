@@ -16,7 +16,9 @@ public class FoodSearch {
      * @return FoodItem that is "closest" to search string
      */
     public FoodItem getFoodItem(String searchString) {
-        List<FoodContext> possibleItems = api.searchForFood(searchString, 10);
+        // we add the term "raw" to bias the API query to find raw fruits/ vegetables
+        // since most items in this database are prepared food products
+        List<FoodContext> possibleItems = api.searchForFood(searchString + "+raw", 10);
         FoodContext closestItem = getClosestDistanceFood(possibleItems, searchString);
         return api.getFoodDetails(closestItem);
     }
