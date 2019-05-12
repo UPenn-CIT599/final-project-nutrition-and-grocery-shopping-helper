@@ -6,23 +6,12 @@ import java.util.ArrayList;
 public class FoodItem {
     public String name;
     public String uniqueIdentifier;
-    public ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
+    public ArrayList<Nutrient> nutrients = new ArrayList<>();
     public Double calories;
-    public Double gramsProtein;
-    public Double gramsFat;
-    public Double gramsCarbs;
 
-    public FoodItem(String name) {
-        this.name = name;
-    }
-
-    public FoodItem(String name, String uniqueIdentifier, Double calories, Double gramsProtein, Double gramsFat, Double gramsCarbs) {
+    public FoodItem(String name, String uniqueIdentifier) {
         this.name = name;
         this.uniqueIdentifier = uniqueIdentifier;
-        this.calories = calories;
-        this.gramsProtein = gramsProtein;
-        this.gramsFat = gramsFat;
-        this.gramsCarbs = gramsCarbs;
     }
 
     public double percentCaloriesFromFat() {
@@ -35,21 +24,19 @@ public class FoodItem {
     }
     
     /**
-     * Used to add a nutrient to the ArrayList of nutrients for this FodItem.
+     * Used to add a nutrient to the ArrayList of nutrients for this FoodItem.
      * @param nutrient
      */
     public void addNutrient(Nutrient nutrient) {
     	nutrients.add(nutrient);
     }
     
-    public String findMatchingNutrient(String nutrient) {
-    	String foodItemNutrient = "not found";
+    public Nutrient findMatchingNutrient(String nutrient) {
     	for (Nutrient ntrt : nutrients ) {
-    		
-    		
+    	    if (ntrt.getName() == nutrient) {
+    	        return ntrt;
+            }
     	}
-    	return foodItemNutrient;
+    	return null;
     }
-    
-    
 }
