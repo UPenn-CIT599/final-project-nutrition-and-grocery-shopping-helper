@@ -7,7 +7,7 @@ public class FoodItem {
     public String name;
     public String uniqueIdentifier;
     public ArrayList<Nutrient> nutrients = new ArrayList<>();
-    public Double calories;
+    public static Double calories;
 
     public FoodItem(String name, String uniqueIdentifier) {
         this.name = name;
@@ -27,6 +27,39 @@ public class FoodItem {
     	nutrients.add(nutrient);
     }
     
+    /**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the uniqueIdentifier
+	 */
+	public String getUniqueIdentifier() {
+		return uniqueIdentifier;
+	}
+
+	/**
+	 * @return the nutrients
+	 */
+	public ArrayList<Nutrient> getNutrients() {
+		return nutrients;
+	}
+
+	/**
+	 * @return the calories
+	 */
+	public static Double getCalories() {
+		return calories;
+	}
+
+	/**
+     * Given a nutrient name, returns the nutrient object.
+     * @param nutrient
+     * @return
+     */
     public Nutrient findMatchingNutrient(String nutrient) {
     	for (Nutrient ntrt : nutrients ) {
     	    if (ntrt.getName() == nutrient) {

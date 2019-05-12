@@ -40,7 +40,7 @@ public class GroceryImageClassification {
         	// Create a new project in the Custom Vision Account 
         	System.out.println("Creating new project:"); 
         	Trainings trainings = client.trainings();
-        	Project project = trainings.createProject().withName("GroceryClassifierMCIT1").execute();
+        	Project project = trainings.createProject().withName("GroceryClassifierMCIT3").execute();
         	
         	
         	//create classification Tags
